@@ -6,7 +6,7 @@ using Persistence.Entites;
 
 namespace Persistence.Repositories
 {
-    public class RevitFilesRepository : IRevitFilesRepository
+    public class RevitFilesRepository : IFilesRepository
     {
         private readonly BookStoreDbContext _context;
 

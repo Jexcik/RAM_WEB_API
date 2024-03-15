@@ -58,6 +58,8 @@ builder.Services.AddDbContext<BookStoreDbContext>(
 
 builder.Services.AddScoped<IBooksService, BooksService>();
 builder.Services.AddScoped<IBooksRepository, BooksRepository>();
+builder.Services.AddScoped<IFilesService, FilesService>();
+builder.Services.AddScoped<IFilesRepository, RevitFilesRepository>();
 
 var app = builder.Build();
 

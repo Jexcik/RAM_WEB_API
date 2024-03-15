@@ -2,7 +2,7 @@
 
 namespace Application.Contracts.Persistence
 {
-    public interface IRevitFilesRepository
+    public interface IFilesRepository
     {
         Task<Guid> Create(RevitFile file);
         Task<Guid> Delete(Guid id);

@@ -6,8 +6,8 @@ namespace Application.Services
 {
     public class FilesService : IFilesService
     {
-        private readonly IRevitFilesRepository _revitFilesRepository;
-        public FilesService(IRevitFilesRepository revitFilesRepository)
+        private readonly IFilesRepository _revitFilesRepository;
+        public FilesService(IFilesRepository revitFilesRepository)
         {
             _revitFilesRepository = revitFilesRepository;
         }

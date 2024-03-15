@@ -10,7 +10,6 @@ namespace Persistence.DatabaseContext
         {
 
         }
-
         public DbSet<BookEntity> Books { get; set; }
         public DbSet<RevitFileEntity> RevitFiles { get; set; }
     }

@@ -1,11 +1,11 @@
-﻿namespace Application.ModelsDTO.FileInfo
-
+﻿
+namespace Application.ModelsDTO.FileInfo
 {
-    public record RevitFileInfoRequest(
+    public record RevitFileInfoResponse(
         Guid id,
         string fileName,
         string filePath,
-        string creator,
+        string create,
         string editor,
         DateTime dateCreation,
         DateTime dateChange
