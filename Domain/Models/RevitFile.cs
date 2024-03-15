@@ -12,7 +12,7 @@
             DateCreation = dateCreator;
             DateChange = dateChange;
         }
-        public Guid? Id { get; }
+        public Guid Id { get; }
 
         public string? FileName { get; }
 

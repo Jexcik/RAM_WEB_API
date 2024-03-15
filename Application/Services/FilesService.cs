@@ -7,24 +7,28 @@ namespace Application.Services
     public class FilesService : IFilesService
     {
         private readonly IRevitFilesRepository _revitFilesRepository;
-        public Task<Guid> CreateFile(RevitFile file)
+        public FilesService(IRevitFilesRepository revitFilesRepository)
         {
-            throw new NotImplementedException();
+            _revitFilesRepository = revitFilesRepository;
+        }
+        public async Task<List<RevitFile>> GetAllFiles()
+        {
+            return await _revitFilesRepository.GetAll();
         }
 
-        public Task<Guid> DeleteFile(Guid Id)
+        public async Task<Guid> CreateFile(RevitFile file)
         {
-            throw new NotImplementedException();
+            return await _revitFilesRepository.Create(file);
         }
 
-        public Task<List<RevitFile>> GetAllFile()
+        public async Task<Guid> DeleteFile(Guid Id)
         {
-            throw new NotImplementedException();
+            return await _revitFilesRepository.Delete(Id);
         }
 
-        public Task<Guid> UpdateFile()
+        public async Task<Guid> UpdateFile(Guid id, string fileName, string filePath, string editor, DateTime dateChange)
         {
-            throw new NotImplementedException();
+            return await _revitFilesRepository.Update(id, fileName, filePath, editor, dateChange);
         }
     }
 }

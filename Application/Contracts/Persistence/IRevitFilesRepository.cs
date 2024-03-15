@@ -7,6 +7,6 @@ namespace Application.Contracts.Persistence
         Task<Guid> Create(RevitFile file);
         Task<Guid> Delete(Guid id);
         Task<List<RevitFile>> GetAll();
-        Task<Guid> Update();
+        Task<Guid> Update(Guid id, string fileName, string filePath, string editor, DateTime dateChange);
     }
 }

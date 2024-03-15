@@ -3,7 +3,7 @@ namespace Persistence.Entites
 {
     public class RevitFileEntity
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         public string? FileName { get; set; }
 

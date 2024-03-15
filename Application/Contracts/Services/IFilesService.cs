@@ -6,7 +6,7 @@ namespace Application.Contracts.Services
     {
         Task<Guid> CreateFile(RevitFile file);
         Task<Guid> DeleteFile(Guid Id);
-        Task<List<RevitFile>> GetAllFile();
-        Task<Guid> UpdateFile();
+        Task<List<RevitFile>> GetAllFiles();
+        Task<Guid> UpdateFile(Guid id, string fileName, string filePath, string editor, DateTime dateChange);
     }
 }
