@@ -6,8 +6,15 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.DatabaseContext;
 using Persistence.Repositories;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, loggerConfig)=>loggerConfig
+.WriteTo.Console()
+.ReadFrom.Configuration(context.Configuration));
+
+//builder.WebHost.UseUrls("http://localhost:5000");
 
 builder.Services.AddIdentityServices(builder.Configuration);
 
@@ -68,6 +75,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

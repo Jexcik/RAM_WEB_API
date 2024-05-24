@@ -1,8 +1,27 @@
 version: '3.4'
 
 services:
-  bookstore.api:
-    image: ${DOCKER_REGISTRY-}bookstoreapi
+  postgresql:
+    container_name: ram.api_db
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: BookStoreDB
+    restart: unless-stopped
+
+  ram.api:
+    container_name: ram.api
+    image: ${DOCKER_REGISTRY-}ramapi
     build:
       context: .
       dockerfile: BookStore.API/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresql
+    restart: unless-stopped
+    environment:
+     - ConnectionStrings__BookStoreConnectionString=Host=ram.api_db;Database=BookStoreDB;Username=postgres;Password=12345678

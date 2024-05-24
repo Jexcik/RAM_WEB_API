@@ -12,8 +12,8 @@ using Persistence.DatabaseContext;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BookStoreDbContext))]
-    [Migration("20240315133039_AddRevitFileService")]
-    partial class AddRevitFileService
+    [Migration("20240519185307_NewMigration")]
+    partial class NewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

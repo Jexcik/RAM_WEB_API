@@ -39,6 +39,11 @@ namespace RAM.API.Controllers
                 request.dateChange
                 );
 
+            if(!string.IsNullOrEmpty(error))
+            {
+                return BadRequest(error);
+            }
+
             var fileId = await _filesService.CreateFile(file);
 
             return Ok(fileId);
