@@ -6,10 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAM.API", "BookStore.API\RAM.API.csproj", "{A4C3E0F6-5793-4278-97E9-5362B70B3EA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{F82A2CDF-8442-40CA-8C93-FB504D46020E}"
-	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-		BookStore.API\Dockerfile = BookStore.API\Dockerfile
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E3F898F7-D7EC-4715-A925-A014D0540113}"
 EndProject
@@ -26,6 +22,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{D5FE5C23-1690-4687-91F1-CA029E345BB8}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9F9F1287-D70A-46D3-8AD3-39B253AABCD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{151E36EE-9BD1-4D76-8C10-A96ECD10952D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAM_MVC", "RAM_MVC\RAM_MVC.csproj", "{A9953433-AB0A-462A-B19E-6C1095226D30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +61,10 @@ Global
 		{9F9F1287-D70A-46D3-8AD3-39B253AABCD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F9F1287-D70A-46D3-8AD3-39B253AABCD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F9F1287-D70A-46D3-8AD3-39B253AABCD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9953433-AB0A-462A-B19E-6C1095226D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9953433-AB0A-462A-B19E-6C1095226D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9953433-AB0A-462A-B19E-6C1095226D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9953433-AB0A-462A-B19E-6C1095226D30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +76,7 @@ Global
 		{21916848-AF86-472B-948A-686DE81D9E34} = {47257542-5211-419A-93F6-66AE9396089E}
 		{C8F15E12-BD9B-4B4D-AC52-64F7F2349247} = {47257542-5211-419A-93F6-66AE9396089E}
 		{D5FE5C23-1690-4687-91F1-CA029E345BB8} = {E3F898F7-D7EC-4715-A925-A014D0540113}
+		{A9953433-AB0A-462A-B19E-6C1095226D30} = {151E36EE-9BD1-4D76-8C10-A96ECD10952D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD9ADC0E-A983-4E32-963F-0A2B02BAAE1F}
