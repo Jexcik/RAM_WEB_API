@@ -8,7 +8,7 @@ namespace RAM_MVC.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

@@ -37,7 +37,6 @@ namespace RAM_MVC.Services
                     _storageService.SetStorageValue("token", authenticationResponse.Token);
                     return true;
                 }
-
                 return false;
             }
             catch
