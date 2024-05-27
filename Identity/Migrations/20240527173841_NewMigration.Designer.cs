@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Identity.Migrations
 {
     [DbContext(typeof(MyIdentityDbContext))]
-    [Migration("20240313152856_MigrationTwo")]
-    partial class MigrationTwo
+    [Migration("20240527173841_NewMigration")]
+    partial class NewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,7 +123,7 @@ namespace Identity.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b74c6bba-0401-42c7-86c7-850e2b943eec",
+                            ConcurrencyStamp = "9d238a2e-0616-42a3-993f-d3dc263723ab",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -131,9 +131,9 @@ namespace Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECAOAbP6fLlyECtxN0WfzE7zEMu6wxmkcUIQw0sURTzjmYTr/RR56s7VTW5InHH4xw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDI5hkVQCtbEuKVXxR6xgwoyS1BH+hEs1wPCI9mIDl8oVtvrJ+PY1MJCrcatOBOFEQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1f41ab08-ee8f-4b39-be61-28fc484788b1",
+                            SecurityStamp = "047681fb-5cd2-46fa-8b8f-707e9f953aef",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -141,7 +141,7 @@ namespace Identity.Migrations
                         {
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49a4a9c3-7330-4881-b91b-5dccca2d5ed4",
+                            ConcurrencyStamp = "4b6c42e5-87ec-4baa-aedb-018d167d2ff4",
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -149,9 +149,9 @@ namespace Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF6bMH9IgnhRSx9oOGO1DjNNgEwlAVzgDS7FpRLQT+S6YA+iz7BhLcQCdVxM1BPAIA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDeB2EHH9EX4XYXrMUy3ziFkK7KZGrpPBsvg+92W7pAd9irdIQpb34knwUpBUbE94A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "db2b54e5-44b7-4d55-bbc7-8cdade727921",
+                            SecurityStamp = "1440ae69-a820-45e0-a21c-2c953b16a7ad",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });

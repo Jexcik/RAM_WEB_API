@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 
 //Настройка HttpClienta с базовым адресом
-builder.Services.AddHttpClient<IClient, Client>(cl => cl.BaseAddress = new Uri("https://localhost:44375"));
+builder.Services.AddHttpClient<IClient, Client>(cl => cl.BaseAddress = new Uri("https://localhost:5001"));
 
 //Добавление AutoMapper с использованием текущей сборки
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

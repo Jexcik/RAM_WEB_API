@@ -56,6 +56,20 @@ namespace Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Authentications",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Token = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Authentications", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -175,8 +189,8 @@ namespace Identity.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "1d994e70-1fa7-42a9-8ffe-866e1788af33", "admin@localhost.com", true, "System", "Admin", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEADheR8fXl610G2fSMgQQS3zwCv13WLzV82t4mOZ8RLzHSRCZLatShKuNTecxNVHQQ==", null, false, "f3d46e82-4c46-4c0f-a81f-16135586454b", false, "admin@localhost.com" },
-                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "c2c24eac-cce1-4f1d-86ea-d211b5f955bb", "user@localhost.com", true, "System", "User", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAECqS3AM/ucl93mO4V1LSJwl1UJACUy8cdBGqJqH1gyH7Ikj3TqXeg5Zf0gobZuIPlA==", null, false, "ffa4e82a-8fb7-4db9-a3ee-828b7475dc3a", false, "user@localhost.com" }
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "9d238a2e-0616-42a3-993f-d3dc263723ab", "admin@localhost.com", true, "System", "Admin", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEDI5hkVQCtbEuKVXxR6xgwoyS1BH+hEs1wPCI9mIDl8oVtvrJ+PY1MJCrcatOBOFEQ==", null, false, "047681fb-5cd2-46fa-8b8f-707e9f953aef", false, "admin@localhost.com" },
+                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "4b6c42e5-87ec-4baa-aedb-018d167d2ff4", "user@localhost.com", true, "System", "User", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEDeB2EHH9EX4XYXrMUy3ziFkK7KZGrpPBsvg+92W7pAd9irdIQpb34knwUpBUbE94A==", null, false, "1440ae69-a820-45e0-a21c-2c953b16a7ad", false, "user@localhost.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -243,6 +257,9 @@ namespace Identity.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Authentications");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

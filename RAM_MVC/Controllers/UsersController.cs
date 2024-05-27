@@ -17,7 +17,7 @@ namespace RAM_MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM login, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 returnUrl ??= Url.Content("~/");
                 var isLoggedIn = await _authenticationService.Authenticate(login.Email, login.Password);

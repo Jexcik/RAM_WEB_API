@@ -224,7 +224,7 @@ namespace RAM_MVC.Services.Base
         public async System.Threading.Tasks.Task<AuthResponse> LoginAsync(AuthRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/Account/login");
+            urlBuilder_.Append("api/Auth/login");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
