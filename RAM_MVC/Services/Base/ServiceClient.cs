@@ -301,7 +301,7 @@ namespace RAM_MVC.Services.Base
         public async System.Threading.Tasks.Task<RegistrationResponse> RegisterAsync(RegistrationRequest body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/Account/register");
+            urlBuilder_.Append("api/Auth/register");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
