@@ -273,7 +273,7 @@ namespace RAM_MVC.Services.Base
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
-                    }
+                    } 
                     finally
                     {
                         if (disposeResponse_)
