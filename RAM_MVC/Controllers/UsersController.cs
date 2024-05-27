@@ -39,7 +39,7 @@ namespace RAM_MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM registration)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var returnUrl = Url.Content("~/");
                 var isCreated = await _authenticationService.Register(registration);
