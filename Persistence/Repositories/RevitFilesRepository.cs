@@ -6,23 +6,33 @@ using Persistence.Entites;
 
 namespace Persistence.Repositories
 {
-    public class RevitFilesRepository : IFilesRepository
+    public class RevitFilesRepository : GenericRepository<RevitFile>, IFilesRepository
     {
         private readonly BookStoreDbContext _context;
 
         public RevitFilesRepository(BookStoreDbContext context)
+            : base(context)
         {
             _context = context;
         }
+
         public async Task<List<RevitFile>> GetAll()
         {
-            var rvtFileEntities = await _context.RevitFiles
-                .AsNoTracking()
-                .ToListAsync();
+            var rvtFileEntities = await _context.RevitFiles.AsNoTracking().ToListAsync();
 
             var rvtFiles = rvtFileEntities
-                .Select(r => RevitFile
-                .Create(r.FileName, r.FilePath, r.Creator, r.Editor, (DateTime)r.DateCreation, (DateTime)r.DateChange).file)
+                .Select(r =>
+                    RevitFile
+                        .Create(
+                            r.FileName,
+                            r.FilePath,
+                            r.Creator,
+                            r.Editor,
+                            (DateTime)r.DateCreation,
+                            (DateTime)r.DateChange
+                        )
+                        .file
+                )
                 .ToList();
 
             return rvtFiles;
@@ -54,15 +64,22 @@ namespace Persistence.Repositories
             return id;
         }
 
-        public async Task<Guid> Update(Guid id, string fileName, string filePath, string editor, DateTime dateChange)
+        public async Task<Guid> Update(
+            Guid id,
+            string fileName,
+            string filePath,
+            string editor,
+            DateTime dateChange
+        )
         {
-            await _context.RevitFiles
-                 .Where(rt => rt.Id == id)
-                 .ExecuteUpdateAsync(s => s
-                 .SetProperty(rt => rt.FileName, rt => fileName)
-                 .SetProperty(rt => rt.FilePath, rt => filePath)
-                 .SetProperty(rt => rt.Editor, rt => editor)
-                 .SetProperty(rt => rt.DateChange, rt => dateChange));
+            await _context
+                .RevitFiles.Where(rt => rt.Id == id)
+                .ExecuteUpdateAsync(s =>
+                    s.SetProperty(rt => rt.FileName, rt => fileName)
+                        .SetProperty(rt => rt.FilePath, rt => filePath)
+                        .SetProperty(rt => rt.Editor, rt => editor)
+                        .SetProperty(rt => rt.DateChange, rt => dateChange)
+                );
 
             return id;
         }

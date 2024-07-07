@@ -2,7 +2,7 @@
 
 namespace Application.Contracts.Persistence
 {
-    public interface IBooksRepository
+    public interface IBooksRepository : IGenericRepository<Book>
     {
         Task<Guid> Create(Book book);
         Task<Guid> Delete(Guid id);

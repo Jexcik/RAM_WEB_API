@@ -1,30 +1,33 @@
-using Application.Contracts.Persistence;
+using Application;
 using Application.Contracts.Services;
 using Application.Services;
 using Identity;
-using Microsoft.EntityFrameworkCore;
-using Persistence.DatabaseContext;
-using Persistence.Repositories;
+using Infrastructure;
 using Microsoft.OpenApi.Models;
+using Persistence;
 using Serilog;
+using Serilog.Formatting.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog((context, loggerConfig)=>loggerConfig
-.WriteTo.Console()
-.ReadFrom.Configuration(context.Configuration));
+builder.Host.UseSerilog(
+    (context, loggerConfig) =>
+        loggerConfig
+            .WriteTo.Console()
+            .WriteTo.File(new JsonFormatter(), "logs/log.json")
+            .ReadFrom.Configuration(context.Configuration)
+);
 
-//builder.WebHost.UseUrls("http://localhost:5000");
-
+builder.Services.AddApplicationServices();
+builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("all", builder => builder.AllowAnyOrigin()
-        .AllowAnyHeader()
-        .AllowAnyMethod());
+    options.AddPolicy("all", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -33,40 +36,34 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "RAMapi", Version = "v1" });
 
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Description = "Заголовок авторизации JWT с использованием схемы носителя",
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer"
-    });
+    c.AddSecurityDefinition(
+        "Bearer",
+        new OpenApiSecurityScheme
+        {
+            Description = "Заголовок авторизации JWT с использованием схемы носителя",
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer"
+        }
+    );
 
     //Добавляем возможность использования аутентификации в Swagger UI
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
+    c.AddSecurityRequirement(
+        new OpenApiSecurityRequirement
         {
-            new OpenApiSecurityScheme
             {
-                Reference=new OpenApiReference
+                new OpenApiSecurityScheme
                 {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
-                }
-            },
-            Array.Empty<string>()
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                Array.Empty<string>()
+            }
         }
-    });
+    );
 });
-
-builder.Services.AddDbContext<BookStoreDbContext>(
-    options =>
-    {
-        options.UseNpgsql(builder.Configuration.GetConnectionString("BookStoreConnectionString"));
-    });
-
-builder.Services.AddScoped<IBooksService, BooksService>();
-builder.Services.AddScoped<IBooksRepository, BooksRepository>();
-builder.Services.AddScoped<IFilesService, FilesService>();
-builder.Services.AddScoped<IFilesRepository, RevitFilesRepository>();
 
 var app = builder.Build();
 

@@ -1,8 +1,11 @@
-﻿namespace Domain.Models
+﻿using Domain.Common;
+
+namespace Domain.Models
 {
-    public class Book
+    public class Book : BaseEntity
     {
         public const int MAX_TITLE_LENGTH = 250;
+
         private Book(Guid id, string title, string description, decimal price)
         {
             Id = id;
@@ -17,7 +20,12 @@
 
         public decimal Price { get; }
 
-        public static (Book book, string Error) Create(Guid id, string title, string description, decimal price)
+        public static (Book book, string Error) Create(
+            Guid id,
+            string title,
+            string description,
+            decimal price
+        )
         {
             var error = string.Empty;
 

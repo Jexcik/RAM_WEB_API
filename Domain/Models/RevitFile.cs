@@ -1,8 +1,17 @@
-﻿namespace Domain.Models
+﻿using Domain.Common;
+
+namespace Domain.Models
 {
-    public class RevitFile
+    public class RevitFile : BaseEntity
     {
-        private RevitFile(string fileName, string filePath, string creator, string editor, DateTime dateCreator, DateTime dateChange)
+        private RevitFile(
+            string fileName,
+            string filePath,
+            string creator,
+            string editor,
+            DateTime dateCreator,
+            DateTime dateChange
+        )
         {
             Id = Guid.NewGuid();
             FileName = fileName;
@@ -12,6 +21,7 @@
             DateCreation = dateCreator;
             DateChange = dateChange;
         }
+
         public Guid Id { get; }
 
         public string? FileName { get; }
@@ -26,7 +36,14 @@
 
         public DateTime? DateChange { get; }
 
-        public static (RevitFile file, string Error) Create(string fileName, string filePath, string creator, string editor, DateTime dateCreator, DateTime dateChange)
+        public static (RevitFile file, string Error) Create(
+            string fileName,
+            string filePath,
+            string creator,
+            string editor,
+            DateTime dateCreator,
+            DateTime dateChange
+        )
         {
             var error = string.Empty;
 
