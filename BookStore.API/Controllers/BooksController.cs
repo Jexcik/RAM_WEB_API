@@ -1,8 +1,9 @@
-﻿using Application.Contracts.Services;
+﻿using Application.Features.Book.Command.CreateBook;
+using Application.Features.Book.Command.DeleteBook;
+using Application.Features.Book.Command.UpdateBook;
+using Application.Features.Book.Queries.GetBook;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using BookStore.API.Contracts;
-using Domain.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace BookStore.API.Controllers
 {
@@ -10,56 +11,49 @@ namespace BookStore.API.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IBooksService _bookService;
+        private readonly IMediator _mediator;
 
-        public BooksController(IBooksService bookService)
+        public BooksController(IMediator mediator)
         {
-            _bookService = bookService;
+            _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<BooksResponse>>> GetBooks()
+        [HttpGet("{id}")]
+        public async Task<BookDetailsDto> GetBooks(Guid id)
         {
-            var books = await _bookService.GetAllBooks();
-
-            var responce = books.Select(b => new BooksResponse(b.Id, b.Title, b.Description, b.Price));
-
-            return Ok(responce);
+            var entityDetails = await _mediator.Send(new GetBookDetailsQuery(id));
+            return entityDetails;
         }
 
-        [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateBook([FromBody] BooksRequest request)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> CreateBook(CreateBookCommand command)
         {
-            var (book, error) = Book.Create(
-                Guid.NewGuid(),
-                request.Title,
-                request.Description,
-                request.Prise
-                );
-
-            if (!string.IsNullOrEmpty(error))
-            {
-                return BadRequest(error);
-            }
-
-            var bookId = await _bookService.CreateBook(book);
-
-            return Ok(bookId);
+            var response = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetBooks), new { id = response }, response);
         }
 
-        [HttpPut("{id:guid}")]
-        public async Task<ActionResult<Guid>> UpdateBooks(Guid id, [FromBody] BooksRequest request)
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> UpdateBooks([FromBody] UpdateBookCommand command)
         {
-            var bookId = await _bookService.UpdateBook(id, request.Title, request.Description, request.Prise);
-
-            return Ok(bookId);
+            await _mediator.Send(command);
+            return NoContent();
         }
 
-        [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<Guid>> DeleteBook(Guid id)
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> DeleteBook(Guid id)
         {
-            return Ok(await _bookService.DeleteBook(id));
+            var command = new DeleteBookCommand() { Id = id };
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }

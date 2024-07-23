@@ -1,8 +1,7 @@
 using Application;
-using Application.Contracts.Services;
-using Application.Services;
 using Identity;
 using Infrastructure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Serilog;
@@ -63,6 +62,10 @@ builder.Services.AddSwaggerGen(c =>
             }
         }
     );
+});
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultSignInScheme = IdentityConstants.ExternalScheme;
 });
 
 var app = builder.Build();

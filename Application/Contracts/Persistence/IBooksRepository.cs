@@ -2,11 +2,5 @@
 
 namespace Application.Contracts.Persistence
 {
-    public interface IBooksRepository : IGenericRepository<Book>
-    {
-        Task<Guid> Create(Book book);
-        Task<Guid> Delete(Guid id);
-        Task<List<Book>> GetAll();
-        Task<Guid> Update(Guid id, string title, string description, decimal price);
-    }
+    public interface IBooksRepository : IGenericRepository<Book> { }
 }
